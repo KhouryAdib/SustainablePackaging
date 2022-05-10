@@ -1,0 +1,64 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+  id 'java'
+}
+
+repositories {
+  mavenCentral()
+}
+
+
+
+
+
+// for use with the Gradle Java Plugin
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src/']
+    }
+    resources {
+      srcDirs = ['src/resources/']
+    }
+  }
+  test {
+    java {
+      srcDirs = ['tst/']
+    }
+    resources {
+      srcDirs = ['tst/resources/']
+    }
+  }
+}
+
+dependencies {
+  implementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+
+  implementation group: 'org.junit.platform', name: 'junit-platform-engine', version: '1.6.0-M1'
+  implementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.8.1'
+
+  implementation group: 'org.reflections', name: 'reflections', version: '0.9.12'
+
+  implementation 'com.google.guava:guava:30.1.1-jre'
+
+  implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+  implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+
+  implementation group: 'org.mockito', name: 'mockito-core', version: '3.10.0'
+
+}
+
+project.configurations.implementation.setCanBeResolved(true)
+jar {
+  manifest {
+    attributes(
+            "Main-Class": "",
+            "Class-Path": configurations.implementation.collect { it.name }.join(' ')
+    )
+  }
+  dependsOn('dependencies')
+}

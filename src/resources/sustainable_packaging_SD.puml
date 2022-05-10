@@ -1,0 +1,31 @@
+@startuml
+actor FC
+participant ShipmentService
+participant CostStrategy
+participant PackagingDAO
+
+' Sequence
+
+FC -> ShipmentService: findShipmentOption(Item, FulfillmentCenter)
+ShipmentService -> PackagingDAO: findShipmentOptions(Item, FulfillmentCenter)
+
+loop List of all FcPackagingOptions
+  PackagingDAO -> Packaging: canFitItem(Item)
+  PackagingDAO <-- Packaging: boolean
+  opt Item fits in Packaging
+    PackagingDAO -> PackagingDAO: add to result
+  end
+end
+
+PackagingDAO --> ShipmentService: List<ShipmentOption>
+
+loop List of all ShipmentOptions
+  ShipmentService -> CostStrategy: getCost(ShipmentOption)
+  ShipmentService -> ShipmentService: add to list of ShipmentCosts
+end
+
+ShipmentService -> ShipmentService: sort List of ShipmentCosts
+ShipmentService -> ShipmentService: get ShipmentOption \nfrom first ShipmentCost\nin sorted list
+ShipmentService --> FC: ShipmentOption
+
+@enduml

@@ -1,0 +1,56 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+// for use with the Gradle Java Plugin
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/']
+        }
+        resources {
+            srcDirs = ['src/resources/']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['tst/']
+        }
+        resources {
+            srcDirs = ['tst/resources/']
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+
+    implementation 'com.google.guava:guava:30.1.1-jre'
+
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.10.0'
+    implementation group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
+
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: '2.14.1'
+
+    implementation group: 'org.reflections', name: 'reflections', version: '0.9.12'
+
+
+    implementation project(":LibrariesAndUtilities:ATACurriculumTestInfrastructure")
+
+
+
+
+//    implementation files("$rootDir/LibrariesAndUtilities/ATAResources.jar")
+//    implementation project('LibrariesAndUtilities:LessonPlanResources')
+}

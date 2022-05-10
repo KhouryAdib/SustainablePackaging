@@ -1,0 +1,81 @@
+@startuml
+title Sustainable Packaging Service
+
+'https://tiny.amazon.com/vjm4xbw7/plancorpamazplanformencohtml
+
+class ShipmentService {
+  + findShipmentOption(Item, FulfillmentCenter) : ShipmentOption
+}
+
+class PackagingDAO {
+  + findShipmentOptions(Item, FulfillmentCenter) : List<ShipmentOption>
+}
+
+class PackagingDatastore {
+  + getFcPackagingOptions() : List<FcPackagingOption>
+}
+
+class Item {
+  -asin: String
+  -description: String
+  -length: BigDecimal
+  -width: BigDecimal
+  -height: BigDecimal
+}
+
+class FulfillmentCenter {
+  -fcCode: String
+}
+
+class ShipmentOption {
+  -item: Item
+  -packaging: Packaging
+  -fulfillmentCenter: FulfillmentCenter
+  + equals(Object)
+  + hashCode()
+}
+
+class ShipmentCost {
+  -shipmentOption: ShipmentOption
+  -cost: BigDecimal
+}
+
+class Packaging {
+  -material: Material
+  -length: BigDecimal
+  -width: BigDecimal
+  -height: BigDecimal
+  +getMass(): BigDecimal
+  +canFitItem(Item): boolean
+}
+
+enum Material {
+  + CORRUGATE
+}
+
+class FcPackagingOption {
+  -fulfillmentCenter: FulfillmentCenter
+  -packaging: Packaging
+}
+
+interface CostStrategy<<interface>> {
+  +getCost(ShipmentOption): ShipmentCost
+}
+
+class MonetaryCostStrategy {
+}
+
+ShipmentService o-- PackagingDAO
+ShipmentService o- CostStrategy
+PackagingDAO o-- FcPackagingOption
+PackagingDAO <-- PackagingDatastore
+FcPackagingOption o-- FulfillmentCenter
+FcPackagingOption o-- Packaging
+Packaging *- Material
+ShipmentOption o-- Item
+ShipmentOption o-- Packaging
+ShipmentOption o-- FulfillmentCenter
+CostStrategy o- ShipmentCost
+
+CostStrategy <|.. MonetaryCostStrategy
+@enduml

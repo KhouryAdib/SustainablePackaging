@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" packages="com.amazonaws.services.lambda.runtime.log4j2">
+    <Appenders>
+        <Console name="CloudwatchLoggerStream" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{DATE} [%-5p] %X{AWSRequestId} (%t) %C:%L: %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="CloudwatchLoggerStream" />
+        </Root>
+        <Logger name="com.amazon.ata" level="DEBUG" additivity="false">
+            <AppenderRef ref="CloudwatchLoggerStream" />
+        </Logger>
+    </Loggers>
+</Configuration>
