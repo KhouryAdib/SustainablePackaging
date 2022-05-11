@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ShipmentCostTest {
 
     private static final BigDecimal COST = BigDecimal.TEN;
-    private static final Packaging PACKAGING = new Packaging(Material.CORRUGATE, BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN);
+    private static final Packaging PACKAGING = new Box(Material.CORRUGATE, BigDecimal.TEN, BigDecimal.TEN, BigDecimal.TEN);
     private static FulfillmentCenter FC = new FulfillmentCenter("IND123");
     private ShipmentOption SHIPMENT_OPTION = ShipmentOption.builder()
         .withFulfillmentCenter(FC)

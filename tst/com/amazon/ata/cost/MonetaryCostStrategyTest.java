@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MonetaryCostStrategyTest {
 
-    private static final Packaging BOX_10x10x20 =
-        new Packaging(Material.CORRUGATE, BigDecimal.valueOf(10), BigDecimal.valueOf(10), BigDecimal.valueOf(20));
+    private static final Box BOX_10x10x20 =
+        new Box(Material.CORRUGATE, BigDecimal.valueOf(10), BigDecimal.valueOf(10), BigDecimal.valueOf(20));
 
     private MonetaryCostStrategy strategy;
 

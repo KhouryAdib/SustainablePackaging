@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/salt
+
+
+class Packaging{
+- Material material
++ Material getMaterial()
++ boolean canFitItem (Item item)
++ BigDecimal getMass()
++ boolean equals(Object o)
++ int hashCode()
+}
+
+enum Material {
+CORRUGATE
+LAMINATED_PLASTIC
+}
+
+class PolyBag{
++BigDecimal volume
+}
+
+class Box{
+- BigDecimal length
+- BigDecimal width
+- BigDecimal height
+}
+
+
+Packaging --> Material
+Box --|> Packaging
+PolyBag --|> Packaging
+
+@enduml

@@ -18,16 +18,16 @@ class PackagingDatastoreTest {
     FulfillmentCenter iad2 = new FulfillmentCenter("IAD2");
     FulfillmentCenter pdx1 = new FulfillmentCenter("PDX1");
 
-    Packaging package10Cm = new Packaging(Material.CORRUGATE,
+    Packaging package10Cm = new Box(Material.CORRUGATE,
             BigDecimal.valueOf(10), BigDecimal.valueOf(10), BigDecimal.valueOf(10));
 
-    Packaging package20Cm = new Packaging(Material.CORRUGATE,
+    Packaging package20Cm = new Box(Material.CORRUGATE,
             BigDecimal.valueOf(20), BigDecimal.valueOf(20), BigDecimal.valueOf(20));
 
-    Packaging package40Cm = new Packaging(Material.CORRUGATE,
+    Packaging package40Cm = new Box(Material.CORRUGATE,
             BigDecimal.valueOf(40), BigDecimal.valueOf(40), BigDecimal.valueOf(40));
 
-    Packaging package60Cm = new Packaging(Material.CORRUGATE,
+    Packaging package60Cm = new Box(Material.CORRUGATE,
             BigDecimal.valueOf(60), BigDecimal.valueOf(60), BigDecimal.valueOf(60));
 
     FcPackagingOption ind1_10Cm = new FcPackagingOption(ind1, package10Cm);
