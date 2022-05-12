@@ -5,8 +5,6 @@ import java.util.Objects;
 
 public class Box extends Packaging {
 
-    private final Material material = Material.CORRUGATE;
-
     /**
      * This packaging's length.
      */
@@ -24,11 +22,13 @@ public class Box extends Packaging {
 
     /**
      * Instantiates a new Packaging object.
+     * @param material   - the material of the package
      * @param length   - the length of the package
      * @param width    - the width of the package
      * @param height   - the height of the package
      */
-    public Box(BigDecimal length, BigDecimal width, BigDecimal height) {
+    public Box(Material material, BigDecimal length, BigDecimal width, BigDecimal height) {
+        super(material);
         this.length = length;
         this.width = width;
         this.height = height;

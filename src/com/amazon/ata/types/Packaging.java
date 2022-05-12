@@ -18,8 +18,9 @@ public class Packaging {
 
     /**
      * Packaging.
+     * @param material material
      */
-    public Packaging() {
+    public Packaging(Material material) {
         this.material = material;
     }
 

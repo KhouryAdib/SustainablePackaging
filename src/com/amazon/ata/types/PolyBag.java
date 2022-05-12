@@ -6,24 +6,27 @@ import java.util.Objects;
 public class PolyBag extends Packaging {
 
     private BigDecimal volume;
-    private final Material material = Material.LAMINATED_PLASTIC;
+
 
     /**
      * declaires the polybag.
-
+     * @param material   - the material of the package
      * @param x X
      * @param y Y
      * @param z Z
      */
-    public PolyBag(BigDecimal x, BigDecimal y, BigDecimal z) {
+    public PolyBag(Material material, BigDecimal x, BigDecimal y, BigDecimal z) {
+        super(material);
         this.volume = x.multiply(y).multiply(z);
     }
 
     /**
      * Makes a polybag.
+     * @param material   - the material of the package
      * @param volume Volume
      */
-    public PolyBag(BigDecimal volume) {
+    public PolyBag(Material material, BigDecimal volume) {
+        super(material);
         this.volume = volume;
     }
 
