@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class Box extends Packaging {
 
+    private final Material material = Material.CORRUGATE;
+
     /**
      * This packaging's length.
      */
@@ -20,6 +22,18 @@ public class Box extends Packaging {
      */
     private BigDecimal height;
 
+    /**
+     * Instantiates a new Packaging object.
+     * @param length   - the length of the package
+     * @param width    - the width of the package
+     * @param height   - the height of the package
+     */
+    public Box(BigDecimal length, BigDecimal width, BigDecimal height) {
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
     public BigDecimal getLength() {
         return length;
     }
@@ -30,22 +44,6 @@ public class Box extends Packaging {
 
     public BigDecimal getHeight() {
         return height;
-    }
-
-    /**
-     * Instantiates a new Packaging object.
-     *
-     *
-     * @param material
-     * @param length   - the length of the package
-     * @param width    - the width of the package
-     * @param height   - the height of the package
-     */
-    public Box(Material material, BigDecimal length, BigDecimal width, BigDecimal height) {
-        super(Material.CORRUGATE);
-        this.length = length;
-        this.width = width;
-        this.height = height;
     }
 
     @Override
@@ -70,9 +68,15 @@ public class Box extends Packaging {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Box box = (Box) o;
         return length.equals(box.length) && width.equals(box.width) && height.equals(box.height);
     }

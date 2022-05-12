@@ -1,6 +1,10 @@
 package com.amazon.ata.datastore;
 
-import com.amazon.ata.types.*;
+import com.amazon.ata.types.Box;
+import com.amazon.ata.types.FcPackagingOption;
+import com.amazon.ata.types.FulfillmentCenter;
+import com.amazon.ata.types.Material;
+import com.amazon.ata.types.Packaging;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -35,7 +39,7 @@ public class PackagingDatastore {
                                                       String length, String width, String height) {
         FulfillmentCenter fulfillmentCenter = new FulfillmentCenter(fcCode);
 
-        Packaging packaging = new Box(material, new BigDecimal(length), new BigDecimal(width),
+        Packaging packaging = new Box(new BigDecimal(length), new BigDecimal(width),
                 new BigDecimal(height));
 
         return new FcPackagingOption(fulfillmentCenter, packaging);

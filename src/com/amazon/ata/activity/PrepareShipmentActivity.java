@@ -31,10 +31,10 @@ public class PrepareShipmentActivity
     public PrepareShipmentActivity() {
 
     }
-     /**
-     * Instantiates a new PrepareShipmentActivity object.
-     * @param shipmentService Shipment service used to retrieve shipment options.
-     */
+    /**
+    * Instantiates a new PrepareShipmentActivity object.
+    * @param shipmentService Shipment service used to retrieve shipment options.
+    */
     public PrepareShipmentActivity(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }

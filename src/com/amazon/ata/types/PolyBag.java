@@ -3,27 +3,35 @@ package com.amazon.ata.types;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class PolyBag extends Packaging{
+public class PolyBag extends Packaging {
 
     private BigDecimal volume;
+    private final Material material = Material.LAMINATED_PLASTIC;
+
+    /**
+     * declaires the polybag.
+
+     * @param x X
+     * @param y Y
+     * @param z Z
+     */
+    public PolyBag(BigDecimal x, BigDecimal y, BigDecimal z) {
+        this.volume = x.multiply(y).multiply(z);
+    }
+
+    /**
+     * Makes a polybag.
+     * @param volume Volume
+     */
+    public PolyBag(BigDecimal volume) {
+        this.volume = volume;
+    }
 
     public BigDecimal getVolume() {
         return volume;
     }
 
-    /**
-     * Instantiates a new Packaging object.
-     *
-     */
-    public PolyBag(Material material, BigDecimal x, BigDecimal y, BigDecimal z) {
-        super(Material.LAMINATED_PLASTIC);
-        this.volume = x.multiply(y).multiply(z);
-    }
 
-    public PolyBag(Material material, BigDecimal volume) {
-        super(Material.LAMINATED_PLASTIC);
-        this.volume = volume;
-    }
 
     @Override
     public boolean canFitItem(Item item) {
@@ -38,11 +46,22 @@ public class PolyBag extends Packaging{
         return bigDecimal;
     }
 
+    /**
+     * Checks if greater, equal, or lower.
+     * @param o Object
+     * @return bool
+     */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         PolyBag polyBag = (PolyBag) o;
         return volume.equals(polyBag.volume);
     }

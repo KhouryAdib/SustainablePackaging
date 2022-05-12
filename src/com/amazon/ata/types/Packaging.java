@@ -16,10 +16,17 @@ public class Packaging {
      */
     private Material material;
 
-    public Packaging(Material material) {
+    /**
+     * Packaging.
+     */
+    public Packaging() {
         this.material = material;
     }
 
+    /**
+     * gets the Material.
+     * @return the Material
+     */
     public Material getMaterial() {
         return material;
     }

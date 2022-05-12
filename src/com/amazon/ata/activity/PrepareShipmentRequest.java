@@ -38,6 +38,9 @@ public class PrepareShipmentRequest {
     */
     private String fcCode;
 
+    /**
+     *  Prepares the shipment request.
+     */
     public PrepareShipmentRequest() {
         this.asin   = "0000000000";
         this.description = "Frank Test Default Item - should not ever be needed - only used for testing";
@@ -47,7 +50,15 @@ public class PrepareShipmentRequest {
         this.fcCode = "IND1";
     }
 
-
+    /**
+     *  prepares the shipment request.
+     * @param asin asin
+     * @param description description
+     * @param length length
+     * @param width width
+     * @param height height
+     * @param fcCode code
+     */
     public PrepareShipmentRequest(String asin, String description, BigDecimal length, BigDecimal width,
                                   BigDecimal height, String fcCode) {
         this.asin = asin;
@@ -58,6 +69,10 @@ public class PrepareShipmentRequest {
         this.fcCode = fcCode;
     }
 
+    /**
+     *  Prepares the shipment request.
+     * @param builder builder
+     */
     public PrepareShipmentRequest(Builder builder) {
         this.asin = builder.asin;
         this.description = builder.description;
@@ -67,14 +82,26 @@ public class PrepareShipmentRequest {
         this.fcCode = builder.fcCode;
     }
 
+    /**
+     *  gets the asin value.
+     * @return String asin
+     */
     public String getAsin() {
         return asin;
     }
 
+    /**
+     * Set the Asin value.
+     * @param asin asin value
+     */
     public void setAsin(String asin) {
         this.asin = asin;
     }
 
+    /**
+     *  gets the Description value.
+     * @return String description
+     */
     public String getDescription() {
         return description;
     }
@@ -83,6 +110,10 @@ public class PrepareShipmentRequest {
         this.description = description;
     }
 
+    /**
+     *  gets the length value.
+     * @return BidDecimal Length
+     */
     public BigDecimal getLength() {
         return length;
     }
@@ -228,12 +259,11 @@ public class PrepareShipmentRequest {
         }
         /**
         * Sets the {@code height} and returns a reference to this Builder so that the methods can be chained together.
-        *
-        * @param fcCode the {@code fcCode} to set
+        * @param fcCodeValue the {@code fcCode} to set
         * @return a reference to this Builder
         */
-        public Builder withFcCode(String fcCode) {
-            this.fcCode = fcCode;
+        public Builder withFcCode(String fcCodeValue) {
+            this.fcCode = fcCodeValue;
             return this;
         }
 
@@ -243,7 +273,7 @@ public class PrepareShipmentRequest {
         * @return a {@code Item} built with parameters of this {@code Item.Builder}
         */
         public PrepareShipmentRequest build() {
-        return new PrepareShipmentRequest(this);
+            return new PrepareShipmentRequest(this);
         }
     }
 
