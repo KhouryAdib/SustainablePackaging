@@ -1,7 +1,8 @@
 package com.amazon.ata;
 
-import com.amazon.ata.cost.CostStrategy;
+import com.amazon.ata.cost.CarbonCostStrategy;
 import com.amazon.ata.cost.MonetaryCostStrategy;
+import com.amazon.ata.cost.WeightedCostStrategy;
 import com.amazon.ata.dao.PackagingDAO;
 import com.amazon.ata.datastore.PackagingDatastore;
 import com.amazon.ata.service.ShipmentService;
@@ -18,8 +19,9 @@ public class App {
         return new PackagingDAO(getPackagingDatastore());
     }
 
-    private static CostStrategy getCostStrategy() {
-        return new MonetaryCostStrategy();
+    private static WeightedCostStrategy getCostStrategy() {
+
+        return new WeightedCostStrategy(new MonetaryCostStrategy(), new CarbonCostStrategy());
     }
 
     public static ShipmentService getShipmentService() {

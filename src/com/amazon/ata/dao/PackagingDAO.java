@@ -9,7 +9,13 @@ import com.amazon.ata.types.Item;
 import com.amazon.ata.types.Packaging;
 import com.amazon.ata.types.ShipmentOption;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 
 /**
  * Access data for which packaging is available at which fulfillment center.
@@ -26,12 +32,12 @@ public class PackagingDAO {
      */
     public PackagingDAO(PackagingDatastore datastore) {
         this.fcPackagingOptions = new HashMap<>();
-        HashSet<Integer> temp = new HashSet<>();
+        Set<Integer> temp = new HashSet<>();
         fcPackagingOptions = new HashMap<>();
 
-        for(FcPackagingOption option: datastore.getFcPackagingOptions()){
+        for (FcPackagingOption option: datastore.getFcPackagingOptions()) {
             Set<FcPackagingOption> store = this.fcPackagingOptions.get(option.getFulfillmentCenter());
-            if(store!=null) {
+            if (store != null) {
                 store.add(option);
             } else {
                 this.fcPackagingOptions.put(option.getFulfillmentCenter(), new HashSet<FcPackagingOption>());
@@ -59,23 +65,27 @@ public class PackagingDAO {
         // Check all FcPackagingOptions for a suitable Packaging in the given FulfillmentCenter
         List<ShipmentOption> result = new ArrayList<>();
         boolean fcFound = false;
-            Set<FcPackagingOption> fcPackagingOption = fcPackagingOptions.get(fulfillmentCenter);
+        Set<FcPackagingOption> fcPackagingOption = fcPackagingOptions.get(fulfillmentCenter);
 
-            for(FcPackagingOption option: fcPackagingOption) {
-                Packaging packaging = option.getPackaging();
-                String fcCode = option.getFulfillmentCenter().getFcCode();
+        if (fcPackagingOption.equals(null)) {
+            throw new UnknownFulfillmentCenterException();
+        }
 
-                if (fcCode.equals(fulfillmentCenter.getFcCode())) {
-                    fcFound = true;
-                    if (packaging.canFitItem(item)) {
-                        result.add(ShipmentOption.builder()
-                                .withItem(item)
-                                .withPackaging(packaging)
-                                .withFulfillmentCenter(fulfillmentCenter)
-                                .build());
-                    }
+        for (FcPackagingOption option: fcPackagingOption) {
+            Packaging packaging = option.getPackaging();
+            String fcCode = option.getFulfillmentCenter().getFcCode();
+
+            if (fcCode.equals(fulfillmentCenter.getFcCode())) {
+                fcFound = true;
+                if (packaging.canFitItem(item)) {
+                    result.add(ShipmentOption.builder()
+                            .withItem(item)
+                            .withPackaging(packaging)
+                            .withFulfillmentCenter(fulfillmentCenter)
+                            .build());
                 }
             }
+        }
 
 
         // Notify caller about unexpected results

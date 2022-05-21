@@ -1,6 +1,11 @@
 package com.amazon.ata.datastore;
 
-import com.amazon.ata.types.*;
+import com.amazon.ata.types.Box;
+import com.amazon.ata.types.FcPackagingOption;
+import com.amazon.ata.types.FulfillmentCenter;
+import com.amazon.ata.types.Material;
+import com.amazon.ata.types.Packaging;
+import com.amazon.ata.types.PolyBag;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -26,7 +31,18 @@ public class PackagingDatastore {
             createFcPackagingOption("IAD2", Material.LAMINATED_PLASTIC, "10000"),
             createFcPackagingOption("PDX1", Material.CORRUGATE, "40", "40", "40"),
             createFcPackagingOption("PDX1", Material.CORRUGATE, "60", "60", "60"),
-            createFcPackagingOption("PDX1", Material.CORRUGATE, "60", "60", "60")
+            createFcPackagingOption("PDX1", Material.CORRUGATE, "60", "60", "60"),
+            createFcPackagingOption("IAD2", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOption("YOW4", Material.LAMINATED_PLASTIC, "2000"),
+            createFcPackagingOption("YOW4", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOption("YOW4", Material.LAMINATED_PLASTIC, "10000"),
+            createFcPackagingOption("IND1", Material.LAMINATED_PLASTIC, "2000"),
+            createFcPackagingOption("IND1", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOption("ABE2", Material.LAMINATED_PLASTIC, "2000"),
+            createFcPackagingOption("ABE2", Material.LAMINATED_PLASTIC, "6000"),
+            createFcPackagingOption("PDX1", Material.LAMINATED_PLASTIC, "5000"),
+            createFcPackagingOption("PDX1", Material.LAMINATED_PLASTIC, "10000"),
+            createFcPackagingOption("YOW4", Material.LAMINATED_PLASTIC, "5000")
     );
 
     /**

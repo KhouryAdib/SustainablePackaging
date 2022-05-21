@@ -21,10 +21,11 @@ public class ShipmentOption {
      */
     private FulfillmentCenter fulfillmentCenter;
 
-    private ShipmentOption(Builder builder) {
+    private ShipmentOption(Builder builder)  {
         item = builder.item;
         packaging = builder.packaging;
         fulfillmentCenter = builder.fulfillmentCenter;
+
     }
 
     /**

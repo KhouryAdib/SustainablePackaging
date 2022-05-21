@@ -9,11 +9,14 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CarbonCostStrategy implements CostStrategy{
+public class CarbonCostStrategy implements CostStrategy {
 
     private static final BigDecimal LABOR_COST = BigDecimal.valueOf(0.43);
     Map<Material, BigDecimal> sustainabilityIndex;
 
+    /**
+     * Cost Strategy for carbon.
+     */
     public CarbonCostStrategy() {
         sustainabilityIndex = new HashMap<>();
         sustainabilityIndex.put(Material.CORRUGATE, BigDecimal.valueOf(.017));

@@ -23,6 +23,7 @@ public class MonetaryCostStrategy implements CostStrategy {
     public MonetaryCostStrategy() {
         materialCostPerGram = new HashMap<>();
         materialCostPerGram.put(Material.CORRUGATE, BigDecimal.valueOf(.005));
+        materialCostPerGram.put(Material.LAMINATED_PLASTIC, BigDecimal.valueOf(.25));
     }
 
     @Override

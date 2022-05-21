@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/salt
+
+interface CostStrategy {
+getCost(ShipmentOption shipmentOption): ShipmentCost
+}
+
+class ShipmentCost
+class MonetaryCostStrategy
+class CarbonCostStrategy
+
+class WeightedCostStrategy
+
+WeightedCostStrategy -> MonetaryCostStrategy
+WeightedCostStrategy -> CarbonCostStrategy
+
+MonetaryCostStrategy ..|> CostStrategy
+CarbonCostStrategy ..|> CostStrategy
+WeightedCostStrategy ..|> CostStrategy
+
+@enduml
