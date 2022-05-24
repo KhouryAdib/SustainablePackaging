@@ -46,13 +46,16 @@ public class ShipmentService {
      * @return the lowest cost shipment option for the item and fulfillment center, or null if none found
      */
     public ShipmentOption findShipmentOption(final Item item, final FulfillmentCenter fulfillmentCenter) {
+        List<ShipmentOption> results;
         try {
-            List<ShipmentOption> results = this.packagingDAO.findShipmentOptions(item, fulfillmentCenter);
+            results = this.packagingDAO.findShipmentOptions(item, fulfillmentCenter);
             return getLowestCostShipmentOption(results);
         } catch (UnknownFulfillmentCenterException e) {
-            throw new RuntimeException("Unknown Fulfillment Center");
-        } catch (NoPackagingFitsItemException e) {
-            throw new RuntimeException("No Packaging Fits Item");
+            //throw new RuntimeException("Unknown Fulfillment Center");
+            return null;
+        } catch (NoPackagingFitsItemException e) { 
+            //throw new RuntimeException("No Packaging Fits Item");
+            return null;
         }
     }
 

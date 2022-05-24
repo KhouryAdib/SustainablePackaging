@@ -67,7 +67,7 @@ public class PackagingDAO {
         boolean fcFound = false;
         Set<FcPackagingOption> fcPackagingOption = fcPackagingOptions.get(fulfillmentCenter);
 
-        if (fcPackagingOption.equals(null)) {
+        if (fcPackagingOption==(null)) {
             throw new UnknownFulfillmentCenterException();
         }
 
