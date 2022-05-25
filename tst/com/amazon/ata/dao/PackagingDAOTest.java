@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class PackagingDAOTest {
+class   PackagingDAOTest {
 
     private Item testItem = createItem("30", "30", "30");
     private Item smallItem = createItem("5", "5", "5");
@@ -59,7 +59,7 @@ class PackagingDAOTest {
         List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, ind1);
 
         // THEN
-        assertEquals(1, shipmentOptions.size(),
+        assertEquals(3, shipmentOptions.size(),
             "When fulfillment center has packaging that can fit item, return a ShipmentOption with the item, "
                 + "fulfillment center, and packaging that can fit the item.");
     }
@@ -87,7 +87,7 @@ class PackagingDAOTest {
         List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, abe2);
 
         // THEN
-        assertEquals(2, shipmentOptions.size(),
+        assertEquals(4, shipmentOptions.size(),
             "When fulfillment center has multiple packaging that can fit item, return a ShipmentOption "
                 + "for each.");
     }

@@ -31,8 +31,6 @@ public class PackagingDAO {
      * @param datastore Where to pull the data from for fulfillment center/packaging available mappings.
      */
     public PackagingDAO(PackagingDatastore datastore) {
-        this.fcPackagingOptions = new HashMap<>();
-        Set<Integer> temp = new HashSet<>();
         fcPackagingOptions = new HashMap<>();
 
         for (FcPackagingOption option: datastore.getFcPackagingOptions()) {
@@ -40,7 +38,7 @@ public class PackagingDAO {
             if (store != null) {
                 store.add(option);
             } else {
-                this.fcPackagingOptions.put(option.getFulfillmentCenter(), new HashSet<FcPackagingOption>());
+                this.fcPackagingOptions.put(option.getFulfillmentCenter(), new HashSet<>());
                 store = this.fcPackagingOptions.get(option.getFulfillmentCenter());
                 store.add(option);
             }
@@ -67,7 +65,7 @@ public class PackagingDAO {
         boolean fcFound = false;
         Set<FcPackagingOption> fcPackagingOption = fcPackagingOptions.get(fulfillmentCenter);
 
-        if (fcPackagingOption==(null)) {
+        if (fcPackagingOption == null) {
             throw new UnknownFulfillmentCenterException();
         }
 
