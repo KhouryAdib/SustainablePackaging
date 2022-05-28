@@ -6,11 +6,16 @@ import com.amazon.ata.datastore.PackagingDatastore;
 import com.amazon.ata.types.FulfillmentCenter;
 import com.amazon.ata.types.Item;
 import com.amazon.ata.types.ShipmentOption;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.*;
 
+import static org.mockito.ArgumentMatchers.*;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 class ShipmentServiceTest {
 
@@ -28,11 +33,31 @@ class ShipmentServiceTest {
             .withAsin("12345")
             .build();
 
+
     private FulfillmentCenter existentFC = new FulfillmentCenter("ABE2");
     private FulfillmentCenter nonExistentFC = new FulfillmentCenter("NonExistentFC");
 
-    private ShipmentService shipmentService = new ShipmentService(new PackagingDAO(new PackagingDatastore()),
-            new MonetaryCostStrategy());
+
+    @Mock
+    PackagingDatastore packagingDatastore = Mockito.mock(PackagingDatastore.class);
+
+    @Mock
+    MonetaryCostStrategy monetaryCostStrategy = Mockito.mock(MonetaryCostStrategy.class);
+
+
+    @InjectMocks
+    private PackagingDAO packagingDAO = Mockito.mock(PackagingDAO.class);
+    
+
+    @Mock
+    private ShipmentService shipmentService = Mockito.mock(ShipmentService.class);
+    // = new ShipmentService(new PackagingDAO(new PackagingDatastore()), new MonetaryCostStrategy());
+
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        }
 
     @Test
     void findBestShipmentOption_existentFCAndItemCanFit_returnsShipmentOption() {

@@ -52,9 +52,11 @@ public class ShipmentService {
             return getLowestCostShipmentOption(results);
         } catch (UnknownFulfillmentCenterException e) {
             //throw new RuntimeException("Unknown Fulfillment Center");
+            System.out.println("1");
             return null;
         } catch (NoPackagingFitsItemException e) { 
             //throw new RuntimeException("No Packaging Fits Item");
+            System.out.println("2");
             return null;
         }
     }
