@@ -8,6 +8,7 @@ import com.amazon.ata.types.FulfillmentCenter;
 import com.amazon.ata.types.Item;
 import com.amazon.ata.types.ShipmentCost;
 import com.amazon.ata.types.ShipmentOption;
+import com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +30,10 @@ public class ShipmentService {
      */
     private CostStrategy costStrategy;
 
+    public ShipmentService() {
+
+    }
+
     /**
      * Instantiates a new ShipmentService object.
      * @param packagingDAO packaging data access object used to retrieve all available shipment options
@@ -46,22 +51,29 @@ public class ShipmentService {
      * @return the lowest cost shipment option for the item and fulfillment center, or null if none found
      */
     public ShipmentOption findShipmentOption(final Item item, final FulfillmentCenter fulfillmentCenter) {
-        List<ShipmentOption> results;
         try {
-            results = this.packagingDAO.findShipmentOptions(item, fulfillmentCenter);
+            List<ShipmentOption> results = this.packagingDAO.findShipmentOptions(item, fulfillmentCenter);
             return getLowestCostShipmentOption(results);
         } catch (UnknownFulfillmentCenterException e) {
-            //throw new RuntimeException("Unknown Fulfillment Center");
-            System.out.println("1");
-            return null;
+            throw new RuntimeException("Unknown Fulfillment Center");
+            //System.out.println("1");
+
         } catch (NoPackagingFitsItemException e) { 
-            //throw new RuntimeException("No Packaging Fits Item");
-            System.out.println("2");
-            return null;
+            throw new RuntimeException("No Packaging Fits Item");
+           //return ShipmentOption.builder().withItem(item).withPackaging(null).withFulfillmentCenter(fulfillmentCenter).build();
+
         }
+        /*catch (IndexOutOfBoundsException e) {
+            throw new RuntimeException("No Packaging Fits Item");
+        }
+
+         */
+        //return null;
     }
 
-    private ShipmentOption getLowestCostShipmentOption(List<ShipmentOption> results) {
+    @VisibleForTesting
+    public ShipmentOption getLowestCostShipmentOption(List<ShipmentOption> results) {
+
         List<ShipmentCost> shipmentCosts = applyCostStrategy(results);
         Collections.sort(shipmentCosts);
         return shipmentCosts.get(0).getShipmentOption();

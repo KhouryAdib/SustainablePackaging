@@ -46,6 +46,23 @@ public class PackagingDAO {
         }
     }
 
+    public PackagingDAO() {
+        PackagingDatastore datastore = new PackagingDatastore();
+        fcPackagingOptions = new HashMap<>();
+
+        for (FcPackagingOption option: datastore.getFcPackagingOptions()) {
+            Set<FcPackagingOption> store = this.fcPackagingOptions.get(option.getFulfillmentCenter());
+            if (store != null) {
+                store.add(option);
+            } else {
+                this.fcPackagingOptions.put(option.getFulfillmentCenter(), new HashSet<>());
+                store = this.fcPackagingOptions.get(option.getFulfillmentCenter());
+                store.add(option);
+            }
+
+        }
+    }
+
     /**
      * Returns the packaging options available for a given item at the specified fulfillment center. The API
      * used to call this method handles null inputs, so we don't have to.
@@ -92,7 +109,7 @@ public class PackagingDAO {
                     String.format("Unknown FC: %s!", fulfillmentCenter.getFcCode()));
         }
 
-        if (result.isEmpty()) {
+        if (result.isEmpty() || result.size() == 0) {
             throw new NoPackagingFitsItemException(
                     String.format("No packaging at %s fits %s!", fulfillmentCenter.getFcCode(), item));
         }
